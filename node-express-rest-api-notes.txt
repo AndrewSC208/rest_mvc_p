@@ -1,0 +1,118 @@
+//============//
+// MODULE ONE //
+//============//
+
+what is rest? Whey should we learn it?
+
+1. Roy fielding disertation:
+	- Representational state transfer (ReST)
+	- set of rules/constrants in place for your server to talk to client
+
+	A. CONSTRAINTS:
+		1. Clinet server: This is how thow whole internet works. Client makes a request and the server responds.
+
+				 _________		req	     ________
+				|         |  ======>  |        |
+				|  client |    res    | Server |
+				|_________|  <======  |________|
+
+		2. Stateless Server:
+
+		3. Constraint of caching:
+			- let the client know how long the data is good for. 
+
+		4. The Uniform Interface:
+			a. Resources: (nouns)
+				ie. Books, Authors
+
+			b. Http verbs:
+				- type of active on the resource.
+					Get: retrieve a resource
+					Post: submit a resource to db
+					Delete: delete resource
+					Put: Update the whole resource
+					Patch: Update a portion of the resource
+
+		5. Hypermedia as the Engin of Application State (HATOS):
+			- A set of hyperlinks that you can use to navigate the api.
+
+SETUP PROJECT:
+In project dir:
+1. npm init
+2. install express:
+	- npm install express --save
+3. Create index.js:
+	
+var express = require('express');
+
+var app = express();
+
+var port = process.env.PORT || 3000;
+
+app.get('/' function(req, res) {
+	res.send('welcome to my api');
+});
+
+app.listen(port, function() {
+	console.log('Running on PORT: ' + port);
+});
+
+4. Test the file in powershell: $ node index.js
+5. npm install gulp --save (save locally)
+6. npm install -g gulp (save globally on computer to be able to run build tasks from the cmd line)
+7. create a gulpfile.js
+8. npm install gulp-nodemon --save
+8. edit file with this:
+
+var gulp = require('gulp'),
+		nodemon = require('gulp-nodemon');
+
+// create default task:
+gulp.task('default', function() {
+	nodemon({
+		script: 'index.js',
+		ext: 'js',
+		env: {
+			PORT:8000
+		},
+		ignore: ["./node_modules/**"]
+	})
+	.on('resart', function() {
+		console.log('resarted');
+	});
+});
+
+Module Summary:
+1. what rest is?
+2. set up node, and express
+3. used gulp to run our server (look into John Papas course on this)!
+
+//============//
+// MODULE TWO //
+//============//
+
+Getting data from the API:
+
+Objectives:
+1. Build restful api with node and express
+2. get a list of items of just one
+3. wire up mongoDB
+4. Search for items
+
+1. create router: a simple router example.
+
+Documention: http://expressjs.com/en/4x/api.html#router
+
+var bookRouter = express.Router();
+
+bookRouter.route('/books')
+	.get(function(req, res) {
+		var resJson = { hello: 'This is an api'};
+
+		res.json(resJson);
+	});
+
+app.use('/api', bookRouter);
+
+2. 
+
